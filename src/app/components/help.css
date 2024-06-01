@@ -1,0 +1,12 @@
+.show-up{
+	transform: translateY(30px);
+	opacity: 0;
+	animation: show .5s ease-out 1 forwards;
+}
+
+@keyframes show {
+	to{
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
