@@ -17,9 +17,9 @@ export default function Home(){
 	}
 	useEffect(() => {
     function handleKeyDown(event:KeyboardEvent) {
-			if(event.key === 'Backspace'){
+			if(event.key === 'Backspace'  && game?.status === 'playing'){
 				game?.removeChar();
-			}else if(event.key === 'Enter'){
+			}else if(event.key === 'Enter' && game?.status === 'playing'){
 				game?.submit();
 			}
 			else if(AlphabetArray.includes(event.key.toUpperCase())){
@@ -46,6 +46,9 @@ export default function Home(){
     paddedArray = [...wordArray, ...Array(6 - wordArray.length).fill(' ')].slice(0, 6);
   }
 
+  function handleReset(){
+    game?.reset();
+  }
   return (
     <div className="h-screen bg-[#181818]">
       <div className="text-center text-4xl text-white p-4 border-b-[1px] border-gray-500 font-bold">
@@ -58,6 +61,12 @@ export default function Home(){
             <Row key={index} props={word} row={index}></Row>
           ))}
         </div>
+        {game.status === 'newGame' && (
+        <>
+          <div className="text-white font-bold mt-2">Correct Word is <span className="text-[#538d4e]">{game.wordToGuess.toUpperCase()}</span></div>
+          <div onClick={handleReset} className="text-white z-10 px-4 bg-[#424249] rounded-md py-2 mt-3 cursor-pointer">Play Again</div>
+        </>  
+        )}
         <Keyboard></Keyboard>
       </div>
 
@@ -67,7 +76,6 @@ export default function Home(){
             <div className="md:p-16 p-8 bg-[#202223] rounded-md popup">
               {game?.status === "win" ? "Nice you have Guessed the right Word" : 'Oops you failed to guess the correct Word'}
             </div>
-
           </div>
       )}
       {help === false && <Help handleClickHide={handleClickHide}></Help>}

@@ -5,7 +5,7 @@
 .popup{
 	transform: scale(0.6);
 	opacity: 0;
-	animation: pop-up .7s ease-out forwards;
+	animation: pop-up .3s ease-out forwards;
 }
 
 @keyframes pop-up {

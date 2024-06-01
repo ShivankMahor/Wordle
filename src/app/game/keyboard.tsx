@@ -30,7 +30,7 @@ export default function Keyboard(){
 	}
 	return(
 		
-		<div className="flex flex-col items-center gap-2 mt-32 md:mt-8 ">
+		<div className="flex flex-col items-center gap-2 mt-16 md:mt-8 ">
 			<style jsx>{`
         .scale-down {
           transform: scale(0.95);

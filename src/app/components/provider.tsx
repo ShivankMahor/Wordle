@@ -13,6 +13,7 @@ interface GameContextType {
 	usedWords:string[];
 	status:string;
 	row:number
+	reset:()=>void;
 }
 
 const GameContext = createContext< GameContextType | undefined >(undefined);
@@ -29,8 +30,9 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
 	const [usedWords, setUsedWords] = useState<string[]>([])
 	const [status, setStatus] = useState<string>('playing');
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
+	console.log(wordToGuess);
 	function initializeArray(rows:number, cols:number) {
+	
 		let array:number[][] = [];
     for (let i = 0; i < rows; i++) {
 			array[i] = [];
@@ -59,8 +61,8 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
     }
 
     timeoutRef.current = setTimeout(() => {
-      reset();
-    }, 2000);
+      setStatus("newGame");
+    }, 1500);
 	}
 	function lose() {
     setStatus("lose");
@@ -70,7 +72,7 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
     }
 
     timeoutRef.current = setTimeout(() => {
-      reset();
+      setStatus("newGame");
     }, 2000);
   }
 
@@ -86,19 +88,26 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
 		setUsedWords([]);
 		setStatus("playing");
 	}
-	function submit(){
+	async function submit(){
+
 		if(wordArray[row].length == wordLength){
 			var newArray = [...wordArray];
 			if(wordToGuess === newArray[row].toLocaleLowerCase()){
+				await getCorrectWords()
+				await checkWord()
 				won();
-				return;
 			}
 			else if(row === 5 && wordToGuess !== newArray[row].toLocaleLowerCase()){
+				await checkWord()
+				await getWrongWords();
+				await getCorrectWords();
+				await getUsedWords()
 				lose();
-			}else if(Dictonary.includes(wordArray[row].toLocaleLowerCase()) && checkWord()){
+			}else if(Dictonary.includes(wordArray[row].toLocaleLowerCase())){
 				newArray.push('');
 				setRow(prev => prev+1);
 				setWordArray(newArray)
+				checkWord()
 				getWrongWords();
 				getCorrectWords();
 				getUsedWords()
@@ -115,7 +124,7 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
 			setWordArray(newArray)
 		}
 	}
-	function checkWord(){
+	async function checkWord(){
 		const guessedWord = wordArray[row].toLocaleLowerCase();
 		if(Dictonary.includes(guessedWord.toLowerCase())){
 			let temp = position;
@@ -135,13 +144,13 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
 		return true;
 	}
 
-	function getWrongWords(){
+	async function getWrongWords(){
 		let newArray = [...wordArray];
 		let joinedGusses = newArray.reduce((accumulator, currentValue) => accumulator + currentValue, '');
 		newArray = joinedGusses.split('').filter(char => (wordToGuess.toUpperCase().includes(char.toUpperCase())))
 		setWrongWords(newArray)
 	}
-	function getCorrectWords() {
+	async function getCorrectWords() {
 		let newArray = [...wordArray];
 		let temp1: string[] = [];  // Initialize temp1 as an array of strings
 	
@@ -155,7 +164,7 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
 	
 		setCorrectWords(temp1);
 	}
-	function getUsedWords(){
+	async  function getUsedWords(){
 		let newArray = [...wordArray];
 		let joinedGusses = newArray.reduce((accumulator, currentValue) => accumulator + currentValue, '');
 		newArray = joinedGusses.split('').filter(char => !(wordToGuess.toUpperCase().includes(char.toUpperCase())))
@@ -165,7 +174,7 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
 
 
 	return (
-		<GameContext.Provider value={{wordArray,status,typeChar,removeChar,submit,position,wordToGuess,correctWords,wrongWords,usedWords,row}}>
+		<GameContext.Provider value={{reset,wordArray,status,typeChar,removeChar,submit,position,wordToGuess,correctWords,wrongWords,usedWords,row}}>
 			{children}
 		</GameContext.Provider>
 	)
