@@ -53,7 +53,7 @@ export default function Home(){
         <img onClick={handleClickShow} className="absolute right-5 w-9 top-4" src="./h.png" alt="Help" />
         </div>
       <div className="flex flex-col justify-normal pt-4 items-center bg-[#181818]">
-        <div className="grid grid-rows-6 gap-1 h-fit mt-16 md:mt-0">
+        <div className="grid grid-rows-6 gap-1 h-fit mt-8 md:mt-0">
           {paddedArray.map((word,index)=>(
             <Row key={index} props={word} row={index}></Row>
           ))}
