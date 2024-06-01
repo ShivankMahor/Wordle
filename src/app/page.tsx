@@ -50,10 +50,10 @@ export default function Home(){
     <div className="h-screen bg-[#181818]">
       <div className="text-center text-4xl text-white p-4 border-b-[1px] border-gray-500 font-bold">
         <div>Wordle</div>
-        <img onClick={handleClickShow} className="absolute right-5 w-12 top-3" src="./h.png" alt="Help" />
+        <img onClick={handleClickShow} className="absolute right-5 w-9 top-4" src="./h.png" alt="Help" />
         </div>
       <div className="flex flex-col justify-normal pt-4 items-center bg-[#181818]">
-        <div className="grid grid-rows-6 gap-1 h-fit mt-24 md:mt-0">
+        <div className="grid grid-rows-6 gap-1 h-fit mt-16 md:mt-0">
           {paddedArray.map((word,index)=>(
             <Row key={index} props={word} row={index}></Row>
           ))}

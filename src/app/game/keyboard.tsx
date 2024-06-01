@@ -30,7 +30,7 @@ export default function Keyboard(){
 	}
 	return(
 		
-		<div className="flex flex-col items-center gap-2 my-8 md:mt-8">
+		<div className="flex flex-col items-center gap-2 mt-32 md:mt-8 ">
 			<style jsx>{`
         .scale-down {
           transform: scale(0.95);
@@ -40,9 +40,9 @@ export default function Keyboard(){
 			<Keys Row={Row1} offset={50}></Keys>
 			<Keys Row={Row2} offset={70}></Keys>
 			<div className="flex gap-2">
-				<div id={`char-${100}`} onClick={()=>handleClick('Enter',100)} className={`select-none cursor-pointer font-extrabold shadow-md shadow-black/50 rounded-md flex items-center justify-center md:text-md text-xs md:h-[55px] h-[38px] w-[45px] md:w-[80px] bg-gray-400/80 text-gray-100`}>ENTER</div>
+				<div id={`char-${100}`} onClick={()=>handleClick('Enter',100)} className={`select-none cursor-pointer font-extrabold shadow-md shadow-black/50 rounded-md flex items-center justify-center md:text-md text-xs md:h-[55px] h-[42px] w-[45px] md:w-[80px] bg-gray-400/80 text-gray-100`}>ENTER</div>
 				<Keys Row={Row3} offset={90}></Keys>
-				<div id={`char-${101}`} onClick={()=>handleClick('Backspace',101)}  className={`select-none cursor-pointer font-extrabold shadow-md shadow-black/50 rounded-md flex items-center justify-center h-[38px] w-[35px] md:h-[55px] md:w-[60px] bg-gray-400/80 text-gray-100`}>⌫</div>
+				<div id={`char-${101}`} onClick={()=>handleClick('Backspace',101)}  className={`select-none cursor-pointer font-extrabold shadow-md shadow-black/50 rounded-md flex items-center justify-center h-[42px] w-[35px] px-1 md:h-[55px] md:w-[60px] bg-gray-400/80 text-gray-100`}>⌫</div>
 			</div>
 		</div>
 	)
