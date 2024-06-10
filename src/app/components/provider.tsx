@@ -1,5 +1,7 @@
 'use client';
 import { ReactNode, createContext, useContext, useState, SetStateAction, Dispatch, useRef  } from "react";
+import Toastify from 'toastify-js';
+import "toastify-js/src/toastify.css";
 import Dictonary from '../../words'
 interface GameContextType {
 	wordArray: string[];
@@ -30,7 +32,6 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
 	const [usedWords, setUsedWords] = useState<string[]>([])
 	const [status, setStatus] = useState<string>('playing');
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-	console.log(wordToGuess);
 	function initializeArray(rows:number, cols:number) {
 	
 		let array:number[][] = [];
@@ -112,9 +113,17 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
 				getCorrectWords();
 				getUsedWords()
 			}else{
-				alert('Word not found')
+				// alert('Word not found')
+				Toastify({
+					text: "Word not found",
+					duration: 800, // Duration in milliseconds
+					close: false, // Show a close button
+					gravity: "top", // Position the toast at the top
+					position: "center", // Center the toast horizontally
+					backgroundColor: "#424249", // Custom background color
+				}).showToast();
 			}
-			console.log(wordToGuess)
+
 		}
 	}
 	function removeChar(){

@@ -41,7 +41,7 @@ export default function Help({handleClickHide}:{handleClickHide:()=>void}){
                 <div className={`border-2 border-gray-400/80 flex justify-center items-center min-w-[35px] min-h-[35px] text-xl text-gray-300 font-extrabold`}>T</div>
                 <div className={`border-2 border-gray-400/80 flex justify-center items-center min-w-[35px] min-h-[35px] text-xl text-gray-300 font-extrabold`}>S</div>
               </div>
-              <h3 className="pt-1 text-sm">U is not in the word in any spot.</h3>
+              <h3 className="pt-1 text-sm">L is not in the word in any spot.</h3>
             </div>
 						<div onClick={handleClickHide} className="text-center p-2 bg-[#424249] m-4 mx-8 rounded-md text-gray-400 font-bold hover:scale-110 hover:text-white transition-transform">OK, Got it</div>
           </div> 

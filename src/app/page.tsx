@@ -10,7 +10,7 @@ const AlphabetArray = [
 ];
 
 export default function Home(){
-  const [help, setHelp] = useState(true) // true for hiding 
+  const [help, setHelp] = useState(false) // true for hiding 
 	const game = useGame();
 	if (!game) {
     return <div>Loading...</div>; // or handle the error appropriately
