@@ -2,6 +2,7 @@
 import { ReactNode, createContext, useContext, useState, SetStateAction, Dispatch, useRef  } from "react";
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css";
+import "/src/toastify.css";
 import Dictonary from '../../words'
 interface GameContextType {
 	wordArray: string[];
@@ -113,7 +114,6 @@ export const GameProvider = ({children}:{children: ReactNode}) => {
 				getCorrectWords();
 				getUsedWords()
 			}else{
-				// alert('Word not found')
 				Toastify({
 					text: "Word not found",
 					duration: 800, // Duration in milliseconds

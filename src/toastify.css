@@ -1,0 +1,6 @@
+.toastify {
+  background: #424249 !important;
+  box-shadow: none !important; /* Remove any shadow */
+  /* border: 1px solid #424249; Optional: Add a border that matches your theme */
+  color: white !important; /* Ensure text is visible on dark background */
+}
